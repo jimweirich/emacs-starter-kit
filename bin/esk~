@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# -*- ruby -*-
+
+def site_dir
+  File.expand_path(File.dirname(__FILE__) + "/../sitedir")
+end
+
+ESK_VERSION = '0.0.1'
+
+if ARGV.empty?
+  puts "Usage: esk (--sitedir|--version)"
+  exit(0)
+end
+
+ARGV.each do |arg|
+  case arg
+  when '--sitedir'
+    puts site_dir
+  when '--emacs'
+    puts "(setq load-path '(cons \"#{site_dir}\" load-path))"
+    puts "(require 'emacs-starter-kit)"
+  when '--version'
+    puts ESK_VERSION
+  else
+    fail "Unknown options: #{arg}"
+  end
+end
